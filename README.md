@@ -39,10 +39,11 @@ The system calculates a score for every song, sorts the songs from highest to lo
 
 1. Create a virtual environment (optional but recommended):
 
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate      # Mac or Linux
-   .venv\Scripts\activate         # Windows
+```bash
+python -m venv .venv
+source .venv/bin/activate      # Mac or Linux
+.venv\Scripts\activate         # Windows
+```
 
 2. Install dependencies
 
@@ -70,18 +71,26 @@ You can add more tests in `tests/test_recommender.py`.
 
 ## Sample Recommendation Output
 
-Paste a sample of your recommender's output here as a text block so a reader can see what it produces:
+User profile: genre=j-pop, mood=happy, energy=0.75
 
-```
-# e.g.:
-# User profile: genre=indie, mood=chill, energy=low
-# Recommendations:
-#   1. ...
-#   2. ...
-#   3. ...
-```
+```text
+Top recommendations:
 
-**Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
+Matsuri - Score: 3.97/4.00
+Because: Mood match (+2.0); Genre match (+1.0); Energy similarity (+0.97)
+
+Rooftop Lights - Score: 2.99/4.00
+Because: Mood match (+2.0); Energy similarity (+0.99)
+
+Sunrise City - Score: 2.93/4.00
+Because: Mood match (+2.0); Energy similarity (+0.93)
+
+golden hour - Score: 2.80/4.00
+Because: Mood match (+2.0); Energy similarity (+0.80)
+
+Mori no chiisana Restaurant - Score: 1.57/4.00
+Because: Genre match (+1.0); Energy similarity (+0.57)
+```
 
 ---
 
@@ -98,6 +107,8 @@ Use this section to document the experiments you ran. For example:
 ## Limitations and Risks
 
 Because mood has the highest scoring weight, songs with the preferred mood may rank above songs from the user's preferred genre. This supports exploration across genres, but it may work less well for users who consider genre more important than mood. Mood labels are also subjective and may not match every listener's interpretation.
+
+Some real songs were manually labeled using listening impressions and publicly available music metadata. Subjective attributes such as mood, energy, danceability, and acousticness are approximate and may vary across listeners or analysis platforms.
 
 ---
 
