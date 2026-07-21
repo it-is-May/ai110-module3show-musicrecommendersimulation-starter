@@ -17,17 +17,19 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
-Explain your design in plain language.
+In real-world music platforms, recommendation systems may use collaborative filtering, content-based filtering, or both. Collaborative filtering uses behavior from many users, such as likes, skips, playlists, and listening history. Content-based filtering compares a user's preferences with song attributes such as genre, mood, energy, and tempo.
 
-Some prompts to answer:
+This project uses a simplified content-based approach. Each song stores information such as its title, artist, genre, mood, energy, tempo, valence, danceability, and acousticness. The user profile stores a favorite genre, favorite mood, target energy level, and acoustic preference. This first version uses only genre, mood, and energy when calculating scores.
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+The first version of the scoring system prioritizes three features:
 
-You can include a simple diagram or bullet list if helpful.
+- A matching mood adds 2.0 points.
+- A matching genre adds 1.0 point.
+- Energy receives a similarity score based on how close the song's energy is to the user's target energy.
+
+Mood receives the highest weight because this recommender is designed to support exploration across genres. A song from an unfamiliar genre can still rank highly when its mood and energy match the user's current preference.
+
+The system calculates a score for every song, sorts the songs from highest to lowest score, and returns the top recommendations. Additional song attributes, including tempo, valence, danceability, and acousticness, remain in the dataset but are not included in the first version of the scoring logic. Acoustic preference is also stored in the user profile but is not currently used for scoring.
 
 ---
 
