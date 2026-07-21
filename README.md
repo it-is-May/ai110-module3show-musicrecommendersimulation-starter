@@ -97,15 +97,7 @@ Use this section to document the experiments you ran. For example:
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
-
-Examples:
-
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
-You will go deeper on this in your model card.
+Because mood has the highest scoring weight, songs with the preferred mood may rank above songs from the user's preferred genre. This supports exploration across genres, but it may work less well for users who consider genre more important than mood. Mood labels are also subjective and may not match every listener's interpretation.
 
 ---
 
