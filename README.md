@@ -80,16 +80,16 @@ Matsuri - Score: 3.97/4.00
 Because: Mood match (+2.0); Genre match (+1.0); Energy similarity (+0.97)
 
 Rooftop Lights - Score: 2.99/4.00
-Because: Mood match (+2.0); Energy similarity (+0.99)
+Because: Mood match (+2.0); Genre mismatch (+0.0); Energy similarity (+0.99)
 
 Sunrise City - Score: 2.93/4.00
-Because: Mood match (+2.0); Energy similarity (+0.93)
+Because: Mood match (+2.0); Genre mismatch (+0.0); Energy similarity (+0.93)
 
 golden hour - Score: 2.80/4.00
-Because: Mood match (+2.0); Energy similarity (+0.80)
+Because: Mood match (+2.0); Genre mismatch (+0.0); Energy similarity (+0.80)
 
 Mori no chiisana Restaurant - Score: 1.57/4.00
-Because: Genre match (+1.0); Energy similarity (+0.57)
+Because: Mood mismatch (+0.0); Genre match (+1.0); Energy similarity (+0.57)
 ```
 
 ---
