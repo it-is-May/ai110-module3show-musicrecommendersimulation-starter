@@ -2,34 +2,25 @@
 
 ## Project Summary
 
-In this project you will build and explain a small music recommender system.
-
-Your goal is to:
-
-- Represent songs and a user "taste profile" as data
-- Design a scoring rule that turns that data into recommendations
-- Evaluate what your system gets right and wrong
-- Reflect on how this mirrors real world AI recommenders
-
-Replace this paragraph with your own summary of what your version does.
+This project is a small content-based music recommender. It compares a user's preferred genre, mood, and target energy with a catalog of 15 songs. Each song receives a weighted score, and the five highest-scoring songs are returned with explanations. I tested the system with multiple user profiles and examined how scoring weights, subjective labels, and uneven data affected the results.
 
 ---
 
 ## How The System Works
 
-In real-world music platforms, recommendation systems may use collaborative filtering, content-based filtering, or both. Collaborative filtering uses behavior from many users, such as likes, skips, playlists, and listening history. Content-based filtering compares a user's preferences with song attributes such as genre, mood, energy, and tempo.
+In real-world music platforms, recommendation systems may use collaborative filtering, content-based filtering, or a combination of both. Collaborative filtering uses behavior from many users, such as likes, skips, playlists, and listening history. Content-based filtering compares a user's preferences with song attributes such as genre, mood, energy, and tempo.
 
-This project uses a simplified content-based approach. Each song stores information such as its title, artist, genre, mood, energy, tempo, valence, danceability, and acousticness. The user profile stores a favorite genre, favorite mood, target energy level, and acoustic preference. This first version uses only genre, mood, and energy when calculating scores.
+This project uses a simplified content-based approach. Each song stores its title, artist, genre, mood, energy, tempo, valence, danceability, and acousticness. The user profile stores a favorite genre, favorite mood, target energy level, and acoustic preference. The current scoring system uses only genre, mood, and energy.
 
-The first version of the scoring system prioritizes three features:
+The scoring rules are:
 
 - A matching mood adds 2.0 points.
 - A matching genre adds 1.0 point.
-- Energy receives a similarity score based on how close the song's energy is to the user's target energy.
+- Energy adds up to 1.0 point based on how close the song's energy is to the user's target.
 
-Mood receives the highest weight because this recommender is designed to support exploration across genres. A song from an unfamiliar genre can still rank highly when its mood and energy match the user's current preference.
+Mood receives the highest weight because the recommender is designed to support exploration across genres. A song from an unfamiliar genre can still rank highly when its mood and energy match the user's current preferences.
 
-The system calculates a score for every song, sorts the songs from highest to lowest score, and returns the top recommendations. Additional song attributes, including tempo, valence, danceability, and acousticness, remain in the dataset but are not included in the first version of the scoring logic. Acoustic preference is also stored in the user profile but is not currently used for scoring.
+The system scores every song, sorts the results from highest to lowest, and returns the top recommendations. Tempo, valence, danceability, acousticness, and acoustic preference are stored but are not currently included in the scoring logic.
 
 ---
 
@@ -71,7 +62,7 @@ You can add more tests in `tests/test_recommender.py`.
 
 ## Sample Recommendation Output
 
-User profile: genre=j-pop, mood=happy, energy=0.75
+User profile: genre = J-Pop, mood = happy, energy = 0.75
 
 ```text
 Top recommendations:
@@ -96,32 +87,29 @@ Because: Mood mismatch (+0.0); Genre match (+1.0); Energy similarity (+0.57)
 
 ## Experiments You Tried
 
-Use this section to document the experiments you ran. For example:
-
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+I temporarily reduced the mood-match weight from 2.0 to 1.0, making mood and genre equally weighted.
+- The Happy J-Pop and Focused Lofi profiles kept the same top songs because those songs matched both mood and genre.
+- For the Intense K-Pop profile, “Good Goodbye” moved from fourth to first because its genre and energy matches became more influential.
+- For the Chill Pop profile, pop songs moved above chill songs, showing that the original 2.0 mood weight strongly favored mood matches.
+- The experiment produced different rankings, but they were not always more accurate. I restored the 2.0 mood weight because the system is designed to prioritize mood and encourage exploration across genres.
 
 ---
 
 ## Limitations and Risks
 
-Because mood has the highest scoring weight, songs with the preferred mood may rank above songs from the user's preferred genre. This supports exploration across genres, but it may work less well for users who consider genre more important than mood. Mood labels are also subjective and may not match every listener's interpretation.
-
-Some real songs were manually labeled using listening impressions and publicly available music metadata. Subjective attributes such as mood, energy, danceability, and acousticness are approximate and may vary across listeners or analysis platforms.
+- Mood weight may dominate genre preferences.
+- Mood labels are subjective.
+- Manually estimated song attributes may be approximate.
 
 ---
 
 ## Reflection
 
-Read and complete `model_card.md`:
+I learned that recommenders turn song attributes and user preferences into rankings by assigning importance to each feature. Even a simple weighted system can feel personalized, but its results depend heavily on the selected weights and dataset labels.
 
-[**Model Card**](model_card.md)
+Bias can appear when some preferences receive more weight, some genres or moods have fewer examples, or subjective labels do not match a listener's interpretation. This project showed me that a system can calculate scores correctly while still producing recommendations that feel less relevant to some users.
 
-Write 1 to 2 paragraphs here about what you learned:
-
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
+*See the complete [Model Card](model_card.md) for detailed evaluation, limitations, and future improvements.*
 
 
 
